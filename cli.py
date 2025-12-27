@@ -31,7 +31,7 @@ def main(path: str):
     trace = []
 
     mode_selector = ModeSelectorBond(default_mode="yin")
-    policy = PolicyBond(forbidden_keys=["_forbidden"])
+    policy = PolicyBond(forbidden_keys=["_forbidden","_resolved_mode"])
     tracer_pre = TraceBond(step_name="pre")
     tracer_post = TraceBond(step_name="post")
 
