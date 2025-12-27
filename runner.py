@@ -39,6 +39,7 @@ def run_scenario(
     mode_selector = ModeSelectorBond(default_mode=default_mode)
     tracer_pre = TraceBond(step_name="pre")
     tracer_post = TraceBond(step_name="post")
+    audit = AuditHashBond()
 
     for ev in events:
         io = BondIO(event=deepcopy(ev), state=nucleus.inspect(), trace=trace)
@@ -59,6 +60,7 @@ def run_scenario(
 
         io = BondIO(event=processed, state=new_state, trace=io.trace)
         io = tracer_post.apply(io)
+        io = audit.apply(io)
 
         trace = io.trace
 
