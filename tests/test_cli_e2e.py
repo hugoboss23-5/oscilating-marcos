@@ -5,7 +5,7 @@ import tempfile
 import os
 
 
-def test_cli_end_to_end():
+def test_cli_end_to_end_state_is_pure_and_traced():
     scenario = [
         {"a": 1},
         {"b": None},
@@ -23,7 +23,14 @@ def test_cli_end_to_end():
         )
         data = json.loads(out.decode("utf-8"))
 
-        assert data["final_state"]["a"] == 1
-        assert data["final_state"]["c"] == 2
+        # Final state must be pure (no meta keys)
+        assert data["final_state"] == {"a": 1, "c": 2}
+
+        # Trace must exist and show transitions
         assert isinstance(data["trace"], list)
-        assert len(data["trace"]) > 0
+        assert len(data["trace"]) == 6
+
+        # No meta keys leak into after_state entries
+        for entry in data["trace"]:
+            for k in entry.get("after_state", {}).keys():
+                assert not k.startswith("_")
