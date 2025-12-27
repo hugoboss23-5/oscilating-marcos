@@ -22,5 +22,5 @@ git revert HEAD
 cat proposals/PROP-002-control-loop-reset.md
 
 ## Approval Status
-APPROVED=no
+APPROVED=yes
 
