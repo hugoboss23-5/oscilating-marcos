@@ -43,7 +43,9 @@ def main(path: str):
         io = tracer_pre.apply(io)
 
         mode = YinMode() if io.event["_resolved_mode"] == "yin" else YangMode()
-        processed = mode.process(io.event)
+        # prevent internal/meta keys from entering nucleus state
+        event_for_nucleus = {k: v for k, v in io.event.items() if k not in ("_mode", "_resolved_mode")}
+        processed = mode.process(event_for_nucleus)
         new_state = nucleus.apply(processed)
 
         io = BondIO(event=processed, state=new_state, trace=io.trace)
