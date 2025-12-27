@@ -12,7 +12,8 @@ def test_runner_end_to_end_pure_state():
 
     assert out["final_state"] == {"a": 1, "c": 2}
     assert isinstance(out["trace"], list)
-    assert len(out["trace"]) == 6
+    assert len(out["trace"]) >= 6
+    assert any(e.get("bond") == "audit_hash" for e in out["trace"])
     for entry in out["trace"]:
         for k in entry.get("after_state", {}).keys():
             assert not k.startswith("_")
