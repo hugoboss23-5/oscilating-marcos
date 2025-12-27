@@ -19,6 +19,7 @@ from bonds.bond import BondIO
 from bonds.mode_selector_bond import ModeSelectorBond
 from bonds.policy_bond import PolicyBond
 from bonds.trace_bond import TraceBond
+from bonds.audit_hash_bond import AuditHashBond
 from bonds.scenario_validator_bond import ScenarioValidatorBond
 
 
