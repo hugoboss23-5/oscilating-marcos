@@ -20,3 +20,7 @@ git revert HEAD
 
 ## Test / verification plan
 cat proposals/PROP-002-control-loop-reset.md
+
+## Approval Status
+APPROVED=no
+
