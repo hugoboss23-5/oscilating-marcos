@@ -17,3 +17,13 @@ def test_policy_rejects_forbidden_key():
         assert False, "expected ValueError"
     except ValueError:
         pass
+
+
+def test_policy_rejects_reserved_internal_keys():
+    io = BondIO(event={"_resolved_mode": "yin"}, state={}, trace=[])
+    b = PolicyBond(forbidden_keys=["_resolved_mode"])
+    try:
+        b.apply(io)
+        assert False, "expected ValueError"
+    except ValueError:
+        pass
