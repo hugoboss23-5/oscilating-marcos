@@ -19,6 +19,7 @@ from bonds.bond import BondIO
 from bonds.mode_selector_bond import ModeSelectorBond
 from bonds.policy_bond import PolicyBond
 from bonds.trace_bond import TraceBond
+from bonds.scenario_validator_bond import ScenarioValidatorBond
 
 
 def run_scenario(
@@ -27,6 +28,9 @@ def run_scenario(
     default_mode: str = "yin",
     forbidden_keys=None,
 ) -> Dict[str, Any]:
+    # preflight scenario validation
+    ScenarioValidatorBond(forbidden_keys=forbidden_keys or []).validate(events)
+
     nucleus = Nucleus()
     trace = []
 
