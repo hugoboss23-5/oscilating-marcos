@@ -12,8 +12,8 @@ Marcos is a regulated software system with:
 
 ## Status
 - Initialized
-- No nucleus implemented yet
-- No modes implemented yet
+- Nucleus implemented (core/nucleus.py)
+- Modes implemented (core/modes.py)
 
 ## Last Updated
 $(date -u +"%Y-%m-%dT%H:%M:%SZ")
